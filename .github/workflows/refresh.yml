@@ -2,26 +2,26 @@ name: Refresh data
 
 on:
   schedule:
-    # Every hour on the hour (UTC). GitHub may delay this by a few minutes.
     - cron: "0 * * * *"
-  workflow_dispatch: # lets you run it manually from the Actions tab
+  workflow_dispatch:
   push:
     branches: [main]
 
 permissions:
-  contents: write # needed to commit the updated data.json
+  contents: write
   pages: write
   id-token: write
 
 concurrency:
-  # Serialise runs of this workflow so two refreshes can't race each
-  # other when committing data.json.
   group: "refresh-data"
   cancel-in-progress: false
 
 jobs:
+  # Job 1: fetch fresh data and commit it. If this succeeds, the
+  # data is safe in the repo regardless of what Pages does later.
   refresh:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -51,9 +51,6 @@ jobs:
             exit 0
           fi
           git commit -m "chore: refresh data.json [skip ci]"
-          # Retry push in case main has moved on (e.g. a manual commit
-          # or another workflow run raced us). Rebase our single
-          # data.json commit onto whatever's new and try again.
           for attempt in 1 2 3 4 5; do
             if git push; then
               echo "Pushed on attempt $attempt."
@@ -65,14 +62,27 @@ jobs:
           echo "Push still failing after 5 attempts."
           exit 1
 
+      - name: Build Pages output
+        run: |
+          mkdir -p _site
+          cp index.html data.json _site/
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
 
+  # Job 2: deploy to Pages. Runs after refresh but failure here does
+  # NOT block future runs — your data.json is already safely committed.
+  # Bounded to 5 minutes so a stuck Pages sync can't waste Actions time.
   deploy:
     needs: refresh
     runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # continue-on-error means a Pages deploy failure won't mark the
+    # whole workflow run as failed when reported on the repo homepage,
+    # so alerts for real issues are more meaningful.
+    continue-on-error: true
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
