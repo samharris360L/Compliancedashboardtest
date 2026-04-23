@@ -12,6 +12,7 @@ Optional:
 
 import json
 import os
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -24,6 +25,9 @@ BASE_URL = os.environ.get("BASE_URL", "https://app.360learning.com")
 
 OUTPUT_PATH = Path(__file__).parent / "data.json"
 API_VERSION = "v2.0"
+
+# Safety cap — stop after this many pages even if more exist.
+MAX_PAGES = 20
 
 
 def get_access_token() -> str:
@@ -45,42 +49,63 @@ def get_access_token() -> str:
     return resp.json()["access_token"]
 
 
-def fetch_courses(token: str, limit: int = 100) -> list:
-    """
-    Fetch a page of courses. Swap this function (and the endpoint) for
-    any other dataset you want to summarise — e.g. /api/v2/users,
-    /api/v2/groups, /api/v2/paths.
-    Remember to grant the matching scope to your API credential.
-    """
-    resp = requests.get(
-        f"{BASE_URL}/api/v2/courses",
-        headers={
-            "accept": "application/json",
-            "360-api-version": API_VERSION,
-            "authorization": f"Bearer {token}",
-        },
-        params={"limit": limit},
-        timeout=30,
-    )
-    resp.raise_for_status()
-    body = resp.json()
-    # The API wraps list results in an object; be tolerant of both shapes.
-    if isinstance(body, dict):
-        return body.get("data", body.get("results", []))
-    return body
+def parse_next_link(link_header):
+    """Extract the `next` URL from an RFC 5988 Link header."""
+    if not link_header:
+        return None
+    # Format: <url>; rel="next"
+    match = re.search(r'<([^>]+)>\s*;\s*rel="next"', link_header)
+    return match.group(1) if match else None
 
 
-def summarise(courses: list) -> dict:
+def fetch_all_courses(token):
+    """
+    Fetch every course via cursor pagination. 360Learning returns up to
+    500 per page and provides the next page URL in the Link response header.
+    Swap the starting URL for any other endpoint you want to summarise
+    (e.g. /api/v2/users, /api/v2/groups, /api/v2/paths).
+    """
+    headers = {
+        "accept": "application/json",
+        "360-api-version": API_VERSION,
+        "authorization": f"Bearer {token}",
+    }
+    url = f"{BASE_URL}/api/v2/courses"
+    collected = []
+
+    for page in range(MAX_PAGES):
+        resp = requests.get(url, headers=headers, timeout=30)
+        resp.raise_for_status()
+        body = resp.json()
+
+        # List endpoints may return a raw list or wrap it in {data: [...]}.
+        if isinstance(body, dict):
+            items = body.get("data", body.get("results", []))
+        else:
+            items = body
+        collected.extend(items)
+
+        next_url = parse_next_link(resp.headers.get("link"))
+        if not next_url:
+            break
+        url = next_url
+    else:
+        print(f"Note: stopped at page cap ({MAX_PAGES}).", file=sys.stderr)
+
+    return collected
+
+
+def summarise(courses):
     """Shape the raw response into something the widget can render cheaply."""
     total = len(courses)
 
     # Count by language if the field is present — adjust to your data.
-    language_counts: dict = {}
+    language_counts = {}
     for c in courses:
         lang = c.get("language") or c.get("lang") or "unknown"
         language_counts[lang] = language_counts.get(lang, 0) + 1
 
-    # Keep only the fields the widget needs, so data.json stays small.
+    # Keep only fields the widget needs, so data.json stays small.
     recent = [
         {
             "id": c.get("_id") or c.get("id"),
@@ -99,7 +124,7 @@ def summarise(courses: list) -> dict:
     }
 
 
-def main() -> int:
+def main():
     if not CLIENT_ID or not CLIENT_SECRET:
         print("ERROR: CLIENT_ID and CLIENT_SECRET must be set.", file=sys.stderr)
         return 1
@@ -108,7 +133,7 @@ def main() -> int:
         print(f"Getting token from {BASE_URL} ...")
         token = get_access_token()
         print("Fetching courses ...")
-        courses = fetch_courses(token)
+        courses = fetch_all_courses(token)
         print(f"Got {len(courses)} courses.")
         summary = summarise(courses)
     except requests.exceptions.HTTPError as exc:
