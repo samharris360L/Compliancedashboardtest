@@ -1,6 +1,159 @@
 {
-  "generatedAt": "1970-01-01T00:00:00Z",
-  "totalCourses": 0,
-  "byLanguage": {},
-  "recent": []
+  "generatedAt": "2026-04-23T15:43:55.715519+00:00",
+  "totalCourses": 596,
+  "byLanguage": {
+    "unknown": 596
+  },
+  "recent": [
+    {
+      "id": "6724b8bbd1ceaabad7fd0fc7",
+      "name": "360Learning Support",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:15.000Z"
+    },
+    {
+      "id": "6724b8bbd1ceaabad7fd0fc8",
+      "name": "What is Blended Learning + Why Should You Use It?",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:15.000Z"
+    },
+    {
+      "id": "6724b8bbd1ceaabad7fd0fc9",
+      "name": "Cr\u00e9er votre premier module sur la plateforme 360Learning !",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:15.000Z"
+    },
+    {
+      "id": "6724b8bbd1ceaabad7fd0fca",
+      "name": "Setting Up Your Platform + Personal Profile",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:15.000Z"
+    },
+    {
+      "id": "6724b8bbd1ceaabad7fd0fcb",
+      "name": "Sharing Your Content: Path Enrollment",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:15.000Z"
+    },
+    {
+      "id": "6724b8bbd1ceaabad7fd0fcc",
+      "name": "Ignite the Power of Artificial Intelligence on Your 360Learning Platform",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:15.000Z"
+    },
+    {
+      "id": "6724b8bbd1ceaabad7fd0fcd",
+      "name": "Introducing Paths \ud83d\ude80",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:15.000Z"
+    },
+    {
+      "id": "6724b8bbd1ceaabad7fd0fce",
+      "name": "Using External Tools to Create Engaging Experiences!",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:15.000Z"
+    },
+    {
+      "id": "6724b8bbd1ceaabad7fd0fcf",
+      "name": "Sharing Your Content: Catalogs, Tags, and Libraries",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:15.000Z"
+    },
+    {
+      "id": "6724b8bbd1ceaabad7fd0fd0",
+      "name": "Using Video to Engage with Your Learners \ud83d\udcf9",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:15.000Z"
+    },
+    {
+      "id": "6724b8bed1ceaabad7fd10a8",
+      "name": "Efficiently Plan Your Training Structure \u23f0",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:18.000Z"
+    },
+    {
+      "id": "6724b8bed1ceaabad7fd10aa",
+      "name": "Create Your First Course on the 360Learning Platform",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:18.000Z"
+    },
+    {
+      "id": "6724b8bed1ceaabad7fd10ad",
+      "name": "Empowering Your Audience with Learning Needs \ud83d\ude4b",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:18.000Z"
+    },
+    {
+      "id": "6724b8bed1ceaabad7fd10ae",
+      "name": "Time to innovate by using external web tools to create engaging experiences!",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:18.000Z"
+    },
+    {
+      "id": "6724b8bed1ceaabad7fd10af",
+      "name": "Giving + Receiving Feedback on Your Training Content",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:18.000Z"
+    },
+    {
+      "id": "6724b8bed1ceaabad7fd10b1",
+      "name": "Discover Group Hierarchy",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:18.000Z"
+    },
+    {
+      "id": "6724b8bed1ceaabad7fd10ba",
+      "name": "How to Add and Manage Users",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:18.000Z"
+    },
+    {
+      "id": "6724b8bed1ceaabad7fd10c6",
+      "name": "Create Your Groups: Identify the Correct Structure for Your Use Case",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:18.000Z"
+    },
+    {
+      "id": "6724b8bfd1ceaabad7fd1117",
+      "name": "Determining the Right Roles For Your Users",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:19.000Z"
+    },
+    {
+      "id": "6724b8bfd1ceaabad7fd1119",
+      "name": "User Custom Fields: An Easy Way to Create User Filters",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:19.000Z"
+    },
+    {
+      "id": "6724b8bfd1ceaabad7fd1186",
+      "name": "The Hows and Whys of Group Creation",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:19.000Z"
+    },
+    {
+      "id": "6724b8c0d1ceaabad7fd11ae",
+      "name": "Utilizing Learning Needs + Projects Together \ud83d\udcaa",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:20.000Z"
+    },
+    {
+      "id": "6724b8c0d1ceaabad7fd11af",
+      "name": "Scale Training Development and Ignite Collaboration with Projects \ud83d\uddc2",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:20.000Z"
+    },
+    {
+      "id": "6724b8c0d1ceaabad7fd11b0",
+      "name": "Discover the Customization Solution \ud83c\udfa8",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:20.000Z"
+    },
+    {
+      "id": "6724b8c0d1ceaabad7fd11c0",
+      "name": "D\u00e9couvrez les caract\u00e9ristiques de la solution Globalization \ud83c\udf0d",
+      "language": null,
+      "createdAt": "2024-11-01T11:17:20.000Z"
+    }
+  ]
 }
