@@ -30,8 +30,8 @@ import requests
 # Add as many path IDs as you like. A user must be compliant on EVERY
 # path to count as compliant overall.
 PATHS = [
-    # {"id": "507f1f77bcf86cd799439011", "label": "Safety Training"},
-    # {"id": "abcdef1234567890abcdef12", "label": "GDPR Foundations"},
+    # {"id": "677ffad519c655c2c323947b", "label": "Compliance Training"},
+    # {"id": "677ffb2ea3382395b80d75fc", "label": "Onboarding"},
 ]
 
 # How long is a certificate valid for (months)?
