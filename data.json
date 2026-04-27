@@ -1,17 +1,17 @@
 {
-  "generatedAt": "2026-04-27T15:05:41.405141+00:00",
+  "generatedAt": "2026-04-27T17:19:05.828565+00:00",
   "validityMonths": 12,
   "renewalWindows": [
     30,
     90
   ],
   "pathCount": 2,
-  "totalActiveUsers": 32,
+  "totalActiveUsers": 39,
   "compliant": 2,
-  "nonCompliant": 30,
+  "nonCompliant": 37,
   "nonComplianceReasons": {
     "lapsedAtLeastOne": 6,
-    "missingAtLeastOne": 24
+    "missingAtLeastOne": 31
   },
   "renewalsDue": {
     "30": 0,
@@ -23,14 +23,14 @@
       "label": "Compliance Training",
       "compliant": 26,
       "lapsed": 6,
-      "missing": 0
+      "missing": 7
     },
     {
       "id": "677ffb2ea3382395b80d75fc",
       "label": "Onboarding",
       "compliant": 2,
       "lapsed": 0,
-      "missing": 30
+      "missing": 37
     }
   ]
 }
