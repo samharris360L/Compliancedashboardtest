@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T11:01:58.103090+00:00",
+  "generatedAt": "2026-09-24T16:24:43.707462+00:00",
   "validityMonths": 12,
   "renewalWindows": [
     30,
@@ -15,7 +15,7 @@
   },
   "renewalsDue": {
     "30": 0,
-    "90": 0
+    "90": 2
   },
   "paths": [
     {
